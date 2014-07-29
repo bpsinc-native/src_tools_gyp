@@ -56,9 +56,9 @@ def EncodeRspFileList(args):
   if not args: return ''
   if args[0].startswith('call '):
     call, program = args[0].split(' ', 1)
-    program = call + ' ' + os.path.normpath(program)
+    program = call + ' \"' + os.path.normpath(program) + '\"'
   else:
-    program = os.path.normpath(args[0])
+    program = '\"' + os.path.normpath(args[0]) + '\"'
   return program + ' ' + ' '.join(QuoteForRspFile(arg) for arg in args[1:])
 
 
