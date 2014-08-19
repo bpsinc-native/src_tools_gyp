@@ -1080,7 +1080,7 @@ class NinjaWriter:
                       for l in library_dirs]
 
     libraries = gyp.common.uniquer(map(self.ExpandSpecial,
-                                       spec.get('libraries', [])))
+                                       config.get('libraries', [])))
     if self.flavor == 'mac':
       libraries = self.xcode_settings.AdjustLibraries(libraries, config_name)
     elif self.flavor == 'win':
@@ -1142,7 +1142,7 @@ class NinjaWriter:
         # Replace "$!PRODUCT_DIR" with "$$PWD" in link flags (which might contain some -L directives).
         prefixed_lflags = [self.ExpandSpecial(f, '$$PWD') for f in ldflags]
         prefixed_library_dirs = ['-L' + self.ExpandSpecial(f, '$$PWD') for f in config.get('library_dirs', [])]
-        prefixed_libraries = gyp.common.uniquer([self.ExpandSpecial(f, '$$PWD') for f in spec.get('libraries', [])])
+        prefixed_libraries = gyp.common.uniquer([self.ExpandSpecial(f, '$$PWD') for f in config.get('libraries', [])])
         if self.flavor == 'mac':
           prefixed_libraries = self.xcode_settings.AdjustLibraries(prefixed_libraries)
         elif self.flavor == 'win':
