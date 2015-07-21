@@ -1149,7 +1149,7 @@ class NinjaWriter:
           prefixed_libraries = self.msvs_settings.AdjustLibraries(prefixed_libraries)
 
         # Make sure that we have relative paths to our out/(Release|Debug), where we generate our .pri file, and then prepend $$PWD to them.
-        prefixed_object_and_archives = ['$$PWD/' + o for o in toAbsPaths(link_deps)]
+        prefixed_object_and_archives = ['$$PWD/' + o for o in toAbsPaths(link_deps + list(solibs))]
 
         pri_file.write("QMAKE_LFLAGS += %s\n" % qmakeLiteral(' '.join(prefixed_lflags)))
         # Follow the logic of the solink rule.
